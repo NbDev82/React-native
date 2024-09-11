@@ -6,8 +6,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import HomeScreen from './src/screen/home/Home';
 import LoginScreen from './src/screen/login/Login';
+import ActiveAccountScreen from './src/screen/login/ActiveAccount';
 import RegisterScreen from './src/screen/register/Register';
 import ForgotPasswordScreen from './src/screen/forgotpassword/ForgotPassWord';
+import VerifyOtpScreen from './src/screen/forgotpassword/VerifyOtp';
+import ChangePasswordScreen from './src/screen/forgotpassword/ChangePassword';
+
 
 const Stack = createStackNavigator();
 
@@ -17,9 +21,12 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="ActiveAccount" component={ActiveAccountScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
+        <Stack.Screen name="VerifyOtp" component={VerifyOtpScreen} />
+        <Stack.Screen name="ChangePassword" component={ChangePasswordScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

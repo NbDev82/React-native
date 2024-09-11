@@ -15,7 +15,7 @@ const Register = ({ navigation }) => {
         }
 
         try {
-          const response = await fetch('https://food-app-api-demo.onrender.com/api/users', {
+          const response = await fetch('http://localhost:8000/api/login/sign-up', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -21,7 +22,7 @@ const Login = ({ navigation }) => {
     }
 
     try {
-      const response = await fetch('https://food-app-api-demo.onrender.com/api/users/login', {
+      const response = await fetch('http://localhost:8000/api/login/sign-in', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -33,11 +34,20 @@ const Login = ({ navigation }) => {
       });
 
       const data = await response.json();
-      console.log(response.ok)
-      if (response.ok) {
-        navigation.navigate('Home');
-      } else {
-        Alert.alert('Đăng nhâp thất bại', data.message || 'An error occurred');
+      const token = data.token;
+      const isActive = data.isActive;
+      if(isActive === false) {
+        navigate.navigate('ActiveAccountScreen', {token})
+      }
+      else {
+        await AsyncStorage.setItem('jwtToken', token);
+
+        console.log(response.ok)
+        if (response.ok) {
+          navigation.navigate('Home');
+        } else {
+          Alert.alert('Đăng nhâp thất bại', data.message || 'An error occurred');
+        }
       }
     } catch (error) {
       Alert.alert('Error', 'An error occurred. Please try again later.');
