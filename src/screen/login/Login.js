@@ -37,7 +37,7 @@ const Login = ({ navigation }) => {
       const token = data.token;
       const isActive = data.isActive;
       if(isActive === false) {
-        navigate.navigate('ActiveAccountScreen', {token})
+        navigation.navigate('ActiveAccountScreen', {token})
       }
       else {
         await AsyncStorage.setItem('jwtToken', token);
